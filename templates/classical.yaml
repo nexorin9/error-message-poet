@@ -1,0 +1,36 @@
+# 古体诗模板（七言绝句）
+将以下错误消息转化为古体诗（七言绝句）：
+
+{error_message}
+
+要求：
+- 使用七言句式
+- 押韵
+- 保持错误的核心含义
+- 共 4 行
+
+示例：
+输入：ZeroDivisionError: division by zero
+输出：
+零除之数不可求
+深渊无底浪悠悠
+计算难成空叹息
+徒留遗憾在心头
+
+---
+
+输入：FileNotFoundError: [Errno 2] No such file or directory: 'missing.txt'
+输出：
+文件何处觅芳踪
+空谷回声入耳中
+路径迷离难寻觅
+徒留怅惘在风中
+
+---
+
+输入：TypeError: unsupported operand type(s) for +: 'int' and 'str'
+输出：
+数字文字不相通
+加号难连两心胸
+运算途中生障碍
+徒留遗憾在心中

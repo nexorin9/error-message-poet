@@ -1,0 +1,37 @@
+# 现代诗模板
+将以下错误消息转化为现代诗：
+
+{error_message}
+
+要求：
+- 保持错误的核心含义
+- 使用诗意的语言
+- 可以使用隐喻和象征
+- 每行不超过 20 字
+- 共 4-8 行
+
+示例：
+输入：ZeroDivisionError: division by zero
+输出：
+数字在零的边缘徘徊
+无法跨越的深渊
+计算停止了脚步
+留下无尽的空白
+
+---
+
+输入：FileNotFoundError: [Errno 2] No such file or directory: 'missing.txt'
+输出：
+文件在角落里沉默
+名字被遗忘在风中
+寻找的路径断了
+只剩空荡荡的回声
+
+---
+
+输入：TypeError: unsupported operand type(s) for +: 'int' and 'str'
+输出：
+数字遇见了文字
+两种语言无法对话
+加号变成了障碍
+运算在误解中停止

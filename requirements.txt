@@ -1,0 +1,27 @@
+# Core dependencies
+python-dotenv>=1.0.0
+openai>=1.0.0
+anthropic>=0.7.0
+
+# Error collection
+traceback>=0.0.0
+
+# CLI
+click>=8.1.0
+
+# Configuration
+pyyaml>=6.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Utilities
+requests>=2.31.0
+tqdm>=4.65.0
+
+# Optional: Local LLM
+httpx>=0.25.0
+
+# Optional: Poetry quality evaluation
+nltk>=3.8.0

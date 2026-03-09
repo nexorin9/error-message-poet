@@ -1,0 +1,41 @@
+# 自由诗模板
+将以下错误消息转化为自由诗：
+
+{error_message}
+
+要求：
+- 自由的格式和节奏
+- 可以使用分行、换行
+- 保持错误的核心含义
+- 表达情感和意境
+
+示例：
+输入：ZeroDivisionError: division by zero
+输出：
+零
+一个没有边界的数字
+当它成为除数
+所有的计算都停止了
+就像时间在那一刻凝固
+只剩下无尽的空白
+
+---
+
+输入：FileNotFoundError: [Errno 2] No such file or directory: 'missing.txt'
+输出：
+文件在等待中被遗忘
+名字在风中飘散
+寻找的路径断了
+只剩空荡荡的回声
+在寂静中回荡
+
+---
+
+输入：TypeError: unsupported operand type(s) for +: 'int' and 'str'
+输出：
+数字遇见了文字
+两种语言无法对话
+加号变成了障碍
+运算在误解中停止
+就像两个世界
+永远无法交汇
