@@ -8,6 +8,7 @@ from anthropic import Anthropic
 import requests
 import json
 from cache_manager import CacheManager
+from template_loader import TemplateLoader
 
 
 class PoetryGenerator:
@@ -39,6 +40,9 @@ class PoetryGenerator:
 
         # 初始化缓存管理器
         self.cache_manager = CacheManager() if self.enable_cache else None
+
+        # 初始化模板加载器
+        self.template_loader = TemplateLoader()
 
         # 检测可用的模型
         self.available_models = self._detect_available_models()
@@ -196,8 +200,15 @@ class PoetryGenerator:
         language: str
     ) -> str:
         """构建生成诗歌的提示词"""
-        templates = {
-            "modern": """将以下错误消息转化为现代诗：
+        # 尝试从模板加载器获取模板
+        template_text = self.template_loader.get_template(template)
+
+        if template_text:
+            return template_text.format(error_message=error_message)
+        else:
+            # 如果模板不存在，使用默认模板
+            templates = {
+                "modern": """将以下错误消息转化为现代诗：
 
 {error_message}
 
@@ -207,7 +218,7 @@ class PoetryGenerator:
 - 可以使用隐喻和象征
 - 每行不超过 20 字
 - 共 4-8 行""",
-            "classical": """将以下错误消息转化为古体诗（七言绝句）：
+                "classical": """将以下错误消息转化为古体诗（七言绝句）：
 
 {error_message}
 
@@ -216,7 +227,7 @@ class PoetryGenerator:
 - 押韵
 - 保持错误的核心含义
 - 共 4 行""",
-            "free": """将以下错误消息转化为自由诗：
+                "free": """将以下错误消息转化为自由诗：
 
 {error_message}
 
@@ -225,10 +236,10 @@ class PoetryGenerator:
 - 可以使用分行、换行
 - 保持错误的核心含义
 - 表达情感和意境"""
-        }
+            }
 
-        template_text = templates.get(template, templates["modern"])
-        return template_text.format(error_message=error_message)
+            template_text = templates.get(template, templates["modern"])
+            return template_text.format(error_message=error_message)
 
     def generate_batch(
         self,

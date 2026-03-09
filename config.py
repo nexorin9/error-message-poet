@@ -62,13 +62,17 @@ class Config:
         """
         errors = {}
 
-        # 验证 API Keys
-        if not self._config.get('OPENAI_API_KEY') and not self._config.get('ANTHROPIC_API_KEY'):
-            errors['API_KEYS'] = '至少需要配置一个 API key (OPENAI_API_KEY 或 ANTHROPIC_API_KEY)'
+        # 验证 API Keys（至少需要一个，除非使用本地模型）
+        has_openai = bool(self._config.get('OPENAI_API_KEY'))
+        has_anthropic = bool(self._config.get('ANTHROPIC_API_KEY'))
+        has_local = bool(self._config.get('LOCAL_MODEL_URL'))
+
+        if not has_openai and not has_anthropic and not has_local:
+            errors['API_KEYS'] = '至少需要配置一个 API key (OPENAI_API_KEY 或 ANTHROPIC_API_KEY)，或配置 LOCAL_MODEL_URL 使用本地模型'
 
         # 验证本地模型 URL
-        if self._config.get('LOCAL_MODEL_URL') and not self._config.get('OPENAI_API_KEY'):
-            errors['LOCAL_MODEL'] = '使用本地模型时需要配置 OPENAI_API_KEY'
+        if self._config.get('LOCAL_MODEL_URL') and not has_local:
+            errors['LOCAL_MODEL'] = 'LOCAL_MODEL_URL 配置无效'
 
         # 验证缓存目录
         cache_dir = self._config.get('CACHE_DIR')

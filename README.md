@@ -103,26 +103,9 @@ print(f"综合得分: {quality['score']}/100")
 
 ### JavaScript API
 
-```javascript
-const { collectErrorsFromError } = require('./error_collector.js');
-const { PoetryGenerator } = require('./poetry_generator.js');
-const { evaluatePoetry } = require('./poetry_quality.js');
+> 注意：JavaScript API 文件（error_collector.js, poetry_generator.js, poetry_quality.js）需要单独创建。
 
-// 收集错误
-try {
-    const result = 1 / 0;
-} catch (error) {
-    const errorObj = collectErrorsFromError(error);
-
-    // 生成诗歌
-    const generator = new PoetryGenerator();
-    const poem = generator.generate(errorObj);
-
-    // 评估诗歌质量
-    const quality = evaluatePoetry(poem, errorObj.message);
-    console.log(`综合得分: ${quality.score}/100`);
-}
-```
+参考 Python API 的使用方式，JavaScript 版本需要实现类似的错误收集、诗歌生成和质量评估功能。
 
 ## 示例
 

@@ -80,17 +80,25 @@ class ErrorCollector:
         """
         if exc_info is None:
             exc_info = tb_module.extract_stack()
+        else:
+            # 如果提供了 exc_info，需要提取 traceback
+            if len(exc_info) >= 3:
+                exc_info = tb_module.extract_tb(exc_info[2])
 
         errors = []
-        for frame in exc_info:
-            error = {
-                "type": frame.name,
-                "file": frame.filename,
-                "line": frame.lineno,
-                "code": frame.line,
-                "message": f"Error in {frame.name} at {frame.filename}:{frame.lineno}"
-            }
-            errors.append(error)
+        # extract_stack 和 extract_tb 都返回 StackSummary
+        if hasattr(exc_info, '__iter__'):
+            for frame in exc_info:
+                # StackSummary 中的元素是 FrameSummary
+                if hasattr(frame, 'filename'):
+                    error = {
+                        "type": getattr(frame, 'name', 'unknown'),
+                        "file": frame.filename,
+                        "line": frame.lineno,
+                        "code": getattr(frame, 'line', ''),
+                        "message": f"Error in {getattr(frame, 'name', 'unknown')} at {frame.filename}:{frame.lineno}"
+                    }
+                    errors.append(error)
 
         return errors
 
